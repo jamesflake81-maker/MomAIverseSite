@@ -50,7 +50,17 @@ document.getElementById("checkout-button").addEventListener("click", async () =>
   }
 });
 
-</script>          Get the MomAIverse Starter Kit
+</script>
+
+<script>
+document.getElementById("checkout-button-secondary").addEventListener("click", async () => {
+  const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", { method: "POST" });
+  const data = await response.json();
+  if (data.url) window.location.href = data.url;
+});
+</script>
+
+          Get the MomAIverse Starter Kit
         </a>
         <a href="#income-paths" class="btn btn-outline">
           Explore Income Paths
@@ -69,13 +79,9 @@ document.getElementById("checkout-button").addEventListener("click", async () =>
         <li>How to collect payments with Stripe and deliver your digital product.</li>
       </ul>
       <a 
-        href="https://buy.stripe.com/fZufZi9O8gCgdefd7YfEk00" 
-        class="btn btn-full"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Start Now with the Starter Kit
-      </a>
+    <button id="checkout-button-secondary" class="btn btn-full">
+      Start Now with the Starter Kit
+    </button>
       <p class="hero-card-footnote">
         No coding, no prior tech experience required.
       </p>
