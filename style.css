@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
   --yellow: #FED571;
   --soft-pink: #FAB0B5;
@@ -412,3 +413,38 @@ body {
     padding-inline: 5vw;
   }
 }
+=======
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+  background: #f8f9fb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #89b4f8;
+  color: white;
+  padding: 30px 0;
+}
+
+main {
+  padding: 40px 10px;
+}
+
+.buy-btn {
+  background-color: #ff66b2;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.buy-btn:hover {
+  background-color: #ff3385;
+}
+>>>>>>> e9f3f2b63424f28c46bea8bbdd097372c203b400
