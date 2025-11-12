@@ -30,3 +30,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+// Stripe Checkout Redirect
+async function startCheckout() {
+  try {
+    const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const data = await response.json();
+
+    if (data.url) {
+      window.location.href = data.url;  // Redirect to Stripe Checkout
+    } else {
+      alert("Could not start checkout — missing Stripe URL.");
+    }
+
+  } catch (error) {
+    console.error("Checkout error:", error);
+    alert("Connection error — please refresh and try again.");
+  }
+}
