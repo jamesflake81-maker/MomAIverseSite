@@ -34,27 +34,14 @@
       <div class="hero-buttons">
 <button id="checkout-button" class="btn btn-primary">Get the MomAIverse Starter Kit</button>
 
-<script>
-document.getElementById("checkout-button").addEventListener("click", async () => {
-  try {
-    const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", { method: "POST" });
-    const data = await response.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Error starting checkout. Please try again later.");
-    }
-  } catch (err) {
-    alert("Connection error — please refresh and try again.");
-  }
-});
-
-</script>          Get the MomAIverse Starter Kit
-        </a>
-        <a href="#income-paths" class="btn btn-outline">
-          Explore Income Paths
-        </a>
-      </div>
+<div class="hero-buttons">
+  <button id="checkout-button" class="btn btn-primary">
+    Get the MomAIverse Starter Kit
+  </button>
+  <a href="#income-paths" class="btn btn-outline">
+    Explore Income Paths
+  </a>
+</div>
       <p class="hero-note">
         Built around free AI tools you can use on any laptop or phone.
       </p>
@@ -280,6 +267,28 @@ document.getElementById("checkout-button-secondary").addEventListener("click", a
   }
 });
 </script>
+<script>
+async function startCheckout() {
+  try {
+    const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
+      method: "POST",
+    });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Error starting checkout. Please try again later.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Connection error — please refresh and try again.");
+  }
+}
+
+document.getElementById("checkout-button")?.addEventListener("click", startCheckout);
+document.getElementById("checkout-button-secondary")?.addEventListener("click", startCheckout);
+</script>
+
 
 </body>
 </html>
