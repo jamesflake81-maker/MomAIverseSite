@@ -248,31 +248,40 @@
     </p>
   </footer>
 
-  <script src="script.js"></script>
 <script>
 
 <script>
-async function startCheckout() {
-  try {
-    const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
-      method: "POST",
-    });
-    const data = await response.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Error starting checkout. Please try again later.");
+document.addEventListener("DOMContentLoaded", () => {
+
+  async function startCheckout() {
+    try {
+      const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Error starting checkout. Please try again later.");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Connection error — please refresh and try again.");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Connection error — please refresh and try again.");
   }
-}
 
-document.getElementById("checkout-button")?.addEventListener("click", startCheckout);
-document.getElementById("checkout-button-secondary")?.addEventListener("click", startCheckout);
+  const primaryBtn = document.getElementById("checkout-button");
+  const secondaryBtn = document.getElementById("checkout-button-secondary");
+
+  if (primaryBtn) primaryBtn.addEventListener("click", startCheckout);
+  if (secondaryBtn) secondaryBtn.addEventListener("click", startCheckout);
+
+});
 </script>
 
-
+<script src="script.js"></script>
 </body>
 </html>
