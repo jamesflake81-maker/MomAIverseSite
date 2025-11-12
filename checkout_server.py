@@ -16,6 +16,9 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 YOUR_DOMAIN = "https://momaiverse.com"
 
+
+YOUR_DOMAIN = "https://momaiverse.com"
+
 @app.route("/create-checkout-session", methods=["POST"])
 def create_checkout_session():
     try:
