@@ -1,3 +1,5 @@
+from flask_cors import CORS
+
 from flask import Flask, jsonify
 import stripe, os
 from dotenv import load_dotenv
@@ -6,6 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Read the secret key from the .env file
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
