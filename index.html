@@ -30,14 +30,26 @@
         MomAIverse gives moms simple, realistic ways to use AI and free tools to start 
         earning online — without tech overwhelm, ads, or huge time commitments.
       </p>
+
       <div class="hero-buttons">
-        <a 
-          href="https://buy.stripe.com/fZufZi9O8gCgdefd7YfEk00" 
-          class="btn btn-primary" 
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Get the MomAIverse Starter Kit
+<button id="checkout-button" class="btn btn-primary">Get the MomAIverse Starter Kit</button>
+
+<script>
+document.getElementById("checkout-button").addEventListener("click", async () => {
+  try {
+    const response = await fetch("/create-checkout-session", { method: "POST" });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Error starting checkout. Please try again later.");
+    }
+  } catch (err) {
+    alert("Connection error — please refresh and try again.");
+  }
+});
+
+</script>          Get the MomAIverse Starter Kit
         </a>
         <a href="#income-paths" class="btn btn-outline">
           Explore Income Paths
