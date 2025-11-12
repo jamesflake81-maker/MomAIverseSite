@@ -249,26 +249,30 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-  async function startCheckout() {
-    try {
-      const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
-        method: "POST",
-      });
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Error starting checkout. Please try again later.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Connection error — please refresh and try again.");
-    }
-  }
+<script>
 
-  document.getElementById("checkout-button")?.addEventListener("click", startCheckout);
-  document.getElementById("checkout-button-secondary")?.addEventListener("click", startCheckout);
-  </script>
+<script>
+async function startCheckout() {
+  try {
+    const response = await fetch("https://momaiverse-server.onrender.com/create-checkout-session", {
+      method: "POST",
+    });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Error starting checkout. Please try again later.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Connection error — please refresh and try again.");
+  }
+}
+
+document.getElementById("checkout-button")?.addEventListener("click", startCheckout);
+document.getElementById("checkout-button-secondary")?.addEventListener("click", startCheckout);
+</script>
+
+
 </body>
 </html>
