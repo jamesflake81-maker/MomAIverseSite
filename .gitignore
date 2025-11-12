@@ -1,0 +1,11 @@
+# Hide environment and system files
+.env
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.db
+*.sqlite3
+*.log
