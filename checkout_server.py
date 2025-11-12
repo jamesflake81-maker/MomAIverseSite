@@ -1,6 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 import stripe, os
-from flask_cors import CORS
 from dotenv import load_dotenv
 
 # Load environment variables from .env
@@ -8,14 +7,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# ✅ Allow cross-origin requests from your live website
-CORS(app, origins=["https://momaiverse.com", "https://www.momaiverse.com"])
-
 # Read the secret key from the .env file
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
-
-YOUR_DOMAIN = "https://momaiverse.com"
-
 
 YOUR_DOMAIN = "https://momaiverse.com"
 
