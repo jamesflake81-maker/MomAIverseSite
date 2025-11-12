@@ -28,7 +28,7 @@ def create_checkout_session():
                             "name": "MomAIverse Starter Kit",
                             "description": "Your first AI-powered income path using free tools.",
                         },
-                        "unit_amount": 2500,
+                        "unit_amount": 100,
                     },
                     "quantity": 1,
                 }
