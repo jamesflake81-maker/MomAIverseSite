@@ -1,11 +1,15 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import stripe, os
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 # Load environment variables from .env
 load_dotenv()
 
 app = Flask(__name__)
+
+# ✅ Allow cross-origin requests from your live website
+CORS(app, origins=["https://momaiverse.com", "https://www.momaiverse.com"])
 
 # Read the secret key from the .env file
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
@@ -37,6 +41,34 @@ def create_checkout_session():
     except Exception as e:
         return jsonify(error=str(e)), 400
 
+from flask import request
+
+@app.route("/webhook", methods=["POST"])
+def webhook_received():
+    payload = request.data
+    sig_header = request.headers.get("Stripe-Signature")
+    webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, webhook_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return jsonify(success=False, error="Invalid payload"), 400
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return jsonify(success=False, error="Invalid signature"), 400
+
+    # Handle successful payment
+    if event["type"] == "checkout.session.completed":
+        session = event["data"]["object"]
+        customer_email = session.get("customer_details", {}).get("email")
+
+        # 🔐 TODO: trigger encrypted file + email delivery here
+        print(f"✅ Payment received from: {customer_email}")
+
+    return jsonify(success=True), 200
 
 if __name__ == "__main__":
     app.run(port=4242)
